@@ -9,10 +9,10 @@ const usersSlice = createSlice({
     error: null,
   },
   reducers: {
-    createUser: (state) => {
+    createUser: (isLoading) => {
       // state.cartItems = [];
     },
-    removeUser: (state, action) => {
+    removeUser: (isLoading, action) => {
       // const itemId = action.payload;
       // state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
     },

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from '../store/users/usersSlice';
-// import UsersDetails from './components/UsersDetails';
+import UsersDetails from './components/UsersDetails';
 
 function UsersList() {
   const dispatch = useDispatch();
@@ -10,10 +10,10 @@ function UsersList() {
   const error = useSelector((state) => state.users.error);
   const appId = 'key';
 
-  // const booksArray = Object.entries(books).flatMap(([itemId, itemBooks]) => itemBooks.map(
-  //  (book) => ({ ...book, item_id: itemId }),
+  // const usersArray = Object.entries(users).flatMap(([userId, itemUsers]) => itemUsers.map(
+  //  (user) => ({ ...user, user_id: userId }),
   // ));
-  // console.log(booksArray);
+  // console.log(usersArray);
 
   useEffect(() => {
     if (isLoading === true) {
@@ -23,14 +23,14 @@ function UsersList() {
 
   return (
     <div className="userslist">
-      {status === 'Loading' && <div>Loading...</div>}
-      {status === 'Failed' && (
+      {isLoading === true && <div>Loading...</div>}
+      {isLoading === false && error === true && (
       <div>
         Error:
         {error}
       </div>
       )}
-      {status === 'Succeeded' && (
+      {isLoading === false && error === false && (
       <>
         <div>
           <div className="userslisth3">
@@ -39,7 +39,7 @@ function UsersList() {
           <ul>
             {users.map((user) => (
               <li className="liuser" key={user.id}>
-                <Bookdetails user={user} />
+                <UsersDetails user={user} />
               </li>
             ))}
           </ul>
