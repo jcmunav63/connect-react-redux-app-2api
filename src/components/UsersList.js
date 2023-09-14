@@ -1,14 +1,28 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from '../store/users/usersSlice';
-import UsersDetails from './components/UsersDetails';
+import Usersdetails from './Usersdetails';
 
-function UsersList() {
-  const dispatch = useDispatch();
+function Userslist() {
   const users = useSelector((state) => state.users.users);
   const isLoading = useSelector((state) => state.users.isLoading);
   const error = useSelector((state) => state.users.error);
-  const appId = 'key';
+  // const appId = 'key';
+  const dispatch = useDispatch();
+  // const usersObject = [
+  //   {
+  //     id: 1,
+  //     title: 'Mr.',
+  //     first: 'John',
+  //     last: 'Smith',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Ms.',
+  //     first: 'Emilia',
+  //     last: 'Clark',
+  //   },
+  // ];
 
   // const usersArray = Object.entries(users).flatMap(([userId, itemUsers]) => itemUsers.map(
   //  (user) => ({ ...user, user_id: userId }),
@@ -16,10 +30,9 @@ function UsersList() {
   // console.log(usersArray);
 
   useEffect(() => {
-    if (isLoading === true) {
-      dispatch(getUsers(appId));
-    }
-  }, [dispatch, isLoading]);
+    isLoading = true;
+    dispatch(getUsers());
+  }, [dispatch]);
 
   return (
     <div className="userslist">
@@ -33,13 +46,13 @@ function UsersList() {
       {isLoading === false && error === false && (
       <>
         <div>
-          <div className="userslisth3">
+          <div className="userslisth3 arial">
             <h3>Users List...</h3>
           </div>
           <ul>
             {users.map((user) => (
-              <li className="liuser" key={user.id}>
-                <UsersDetails user={user} />
+              <li className="liuser arial" key={user.id}>
+                <Usersdetails key={user.id} user={user} />
               </li>
             ))}
           </ul>
@@ -50,4 +63,4 @@ function UsersList() {
   );
 }
 
-export default UsersList;
+export default Userslist;

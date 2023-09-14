@@ -1,26 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 // import cartItems from '../../cartItems';
 
 const usersSlice = createSlice({
   name: 'users',
   initialState: {
-    users: [],
+    users: [
+      {
+        id: 1,
+        title: 'Mr.',
+        first: 'John',
+        last: 'Smith',
+      },
+      {
+        id: 2,
+        title: 'Ms.',
+        first: 'Emilia',
+        last: 'Clark',
+      },
+    ],
     isLoading: true,
     error: null,
   },
   reducers: {
-    createUser: (isLoading) => {
-      // state.cartItems = [];
+    getUsers: () => {
+      const usersObject = usersSlice.users;
+      return usersObject;
     },
-    removeUser: (isLoading, action) => {
-      // const itemId = action.payload;
-      // state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
-    },
+    // state.cartItems = [];
+    // return usersObject;
   },
-  extraReducers: {
-  },
+  // createUser: (isLoading) => {
+  //   state.cartItems = [];
+  // },
+  // removeUser: (isLoading, action) => {
+  //   const itemId = action.payload;
+  //   state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
+  // },
 });
 
-export const{ createUser, removeUser } = usersSlice.actions;
+export const { getUsers } = usersSlice.actions;
 
 export default usersSlice;

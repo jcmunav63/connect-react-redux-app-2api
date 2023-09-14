@@ -1,12 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import usersReducer from './store/users/usersSlice';
 
-const rootReducer = combineReducers({
-  users: usersReducer,
-});
+// const rootReducer = usersReducer;
+// ({
+//   users: usersReducer,
+// });
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    users: usersReducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,
   }),

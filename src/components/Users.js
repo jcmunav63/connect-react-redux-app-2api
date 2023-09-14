@@ -1,14 +1,10 @@
 import React from 'react';
-import UsersList from './components/UsersList';
+import Userslist from './Userslist';
 
-const Users = () => {
-  // const users = [];
-
-  return (
-    <div className="divusers">
-      <UsersList objectUsers={objectUsers} />
-    </div>
-  );
-};
+const Users = () => (
+  <div className="divusers arial">
+    <Userslist />
+  </div>
+);
 
 export default Users;
