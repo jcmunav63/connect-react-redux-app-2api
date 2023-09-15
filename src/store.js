@@ -1,18 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import usersReducer from './store/users/usersSlice';
 
-// const rootReducer = usersReducer;
-// ({
-//   users: usersReducer,
-// });
-
 const store = configureStore({
   reducer: {
     users: usersReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ // ELIM
+    serializableCheck: false, // ELIM
+  }), // ELIM
 });
 
 export default store;

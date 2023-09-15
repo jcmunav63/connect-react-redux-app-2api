@@ -1,43 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
-// import cartItems from '../../cartItems';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const getUsers = createAsyncThunk('users/getUsers', async (thunkAPI) => {
+  try {
+    const response = await fetch('https://randomuser.me/api/?results=6');
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(
+      'An error ocurred while fetching the users',
+    );
+  }
+});
 
 const usersSlice = createSlice({
   name: 'users',
   initialState: {
-    users: [
-      {
-        id: 1,
-        title: 'Mr.',
-        first: 'John',
-        last: 'Smith',
-      },
-      {
-        id: 2,
-        title: 'Ms.',
-        first: 'Emilia',
-        last: 'Clark',
-      },
-    ],
-    isLoading: true,
+    users: [],
+    isLoading: false,
     error: null,
   },
-  reducers: {
-    getUsers: () => {
-      const usersObject = usersSlice.users;
-      return usersObject;
-    },
-    // state.cartItems = [];
-    // return usersObject;
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUsers.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.users = action.payload;
+    });
+    builder.addCase(getUsers.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
   },
-  // createUser: (isLoading) => {
-  //   state.cartItems = [];
-  // },
-  // removeUser: (isLoading, action) => {
-  //   const itemId = action.payload;
-  //   state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
-  // },
 });
 
-export const { getUsers } = usersSlice.actions;
-
-export default usersSlice;
+export default usersSlice.reducer;
